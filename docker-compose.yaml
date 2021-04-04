@@ -1,0 +1,40 @@
+
+version: '3'
+
+services:
+
+  nodo-shard01-srv1:
+    container_name: nodo-shard01-srv1
+    image: mongo
+    command: mongod --replSet nodo-shard01-rs --shardsrv --port 27017 --dbpath /data/db
+    ports:
+      - 50001:27017
+    volumes:
+      - data/nodo-shard01-srv1:/data/db
+      - scripts:/scripts
+
+  nodo-shard01-srv2:
+    container_name: nodo-shard01-srv2
+    image: mongo
+    command: mongod --replSet nodo-shard01-rs --shardsrv --port 27017 --dbpath /data/db
+    ports:
+      - 50002:27017
+    volumes:
+      - data/nodo-shard01-srv2:/data/db
+      - scripts:/scripts
+
+  nodo-shard01-srv3:
+    container_name: nodo-shard01-srv3
+    image: mongo
+    command: mongod --replSet nodo-shard01-rs --shardsrv --port 27017 --dbpath /data/db
+    ports:
+      - 50003:27017
+    volumes:
+      - data/nodo-shard01-srv3:/data/db
+      - scripts:/scripts
+
+volumes:
+  nodo-shard01-srv1: {}
+  nodo-shard01-srv2: {}
+  nodo-shard01-srv3: {}
+

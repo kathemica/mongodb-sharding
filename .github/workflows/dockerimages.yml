@@ -1,0 +1,26 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node Console App
+
+on:
+  push:
+    branches: [ main ]  
+jobs:
+  first-job:
+    name: Build with Docker
+    runs-on: ubuntu-latest    
+    
+    steps:      
+      - name: Checking out code
+        uses: actions/checkout@main
+      - name: Build the stack
+        run: docker-compose up -d
+      - name: Test
+        run: docker-compose -f docker-compose.yaml up -d
+      - name: Check running containers
+        run: docker ps -a
+      - name: Check logs
+        run: docker logs backend
+      - name: Run test suite
+        run: docker-compose exec nodo-shard01-srv1 sh -c "mongo < /scripts/testing.js"
