@@ -1,0 +1,23 @@
+############################################################################### 
+# Authors:  Kathrine Aguirre
+# Date:     Abril 2021
+# Licence:  Apache v02
+# Project:  Mongo Sharding
+# Brief:    Docker compose file to configure whole application
+#
+# How to use the containers
+#   - docker-compose -f docker-compose.yaml up -d
+#
+###############################################################################
+version: '3'
+services:
+#------------------------------------------------------
+# Config Server
+#------------------------------------------------------
+  mongos:
+    container_name: mongos
+    image: mongo
+    command: mongos --configdb cfgrs/10.0.0.10:40001,10.0.0.10:40002,10.0.0.10:40003 --bind_ip 0.0.0.0 --port 27017
+    ports:
+      - 60000:27017
+

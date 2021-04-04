@@ -1,0 +1,113 @@
+############################################################################### 
+# Authors:  Kathrine Aguirre
+# Date:     Abril 2021
+# Licence:  Apache v02
+# Project:  Mongo Sharding
+# Brief:    Docker compose file to configure whole application
+#
+# How to use the containers
+#   - docker-compose -f docker-compose.yaml up -d
+#
+###############################################################################
+version: '3'
+services:
+#------------------------------------------------------
+# Config Server
+#------------------------------------------------------
+  config-srv01:
+    container_name: config-srv01
+    image: mongo
+    command: mongod --configsvr --replSet config-rs --port 27017 --dbpath /data/db
+    ports:
+      - 40001:27017
+    volumes:      
+      - ./scripts:/scripts
+      - ./data/nodo-config-srv01:/data/db
+
+  config-srv02:
+    container_name: config-srv02
+    image: mongo
+    command: mongod --configsvr --replSet config-rs --port 27017 --dbpath /data/db
+    ports:
+      - 40002:27017
+    volumes:
+      - ./scripts:/scripts
+      - ./data/nodo-config-srv02:/data/db
+
+  config-srv03:
+    container_name: config-srv03
+    image: mongo
+    command: mongod --configsvr --replSet config-rs --port 27017 --dbpath /data/db
+    ports:
+      - 40003:27017
+    volumes:
+      - ./scripts:/scripts
+      - ./data/nodo-config-srv03:/data/db
+#------------------------------------------------------
+# NODO 01
+#------------------------------------------------------
+  nodo-shard01-srv01:
+    image: mongo
+    hostname: nodo-shard01-srv01
+    container_name: nodo-shard01-srv01    
+    command: mongod --shardsvr --replSet nodo01-rs --port 27017 --dbpath /data/db
+    ports:
+      - 50001:27017  
+    volumes:
+      - ./scripts:/scripts
+      - ./data/nodo-shard01-srv01:/data/db
+
+  nodo-shard01-srv02:
+    image: mongo
+    hostname: nodo-shard01-srv02
+    container_name: nodo-shard01-srv02
+    command: mongod --shardsvr --replSet nodo01-rs --port 27017 --dbpath /data/db
+    ports:
+      - 50002:27017
+    volumes:
+      - ./data/nodo-shard01-srv02:/data/db
+      - ./scripts:/scripts
+
+  nodo-shard01-srv3:
+    image: mongo
+    hostname: nodo-shard01-srv3
+    container_name: nodo-shard01-srv3
+    command: mongod --shardsvr --replSet nodo01-rs --port 27017 --dbpath /data/db
+    ports:
+      - 50003:27017
+    volumes:
+      - ./data/nodo-shard01-srv3:/data/db
+      - ./scripts:/scripts
+#------------------------------------------------------
+# NODO 02
+#------------------------------------------------------
+  nodo-shard02-srv01:
+    container_name: nodo-shard02-srv01
+    image: mongo
+    command: mongod --shardsvr --replSet nodo02-rs --port 27017 --dbpath /data/db
+    ports:
+      - 50004:27017
+    volumes:
+      - ./data/nodo-shard02-srv01:/data/db
+      - ./scripts:/scripts
+
+  nodo-shard02-srv02:
+    container_name: nodo-shard02-srv02
+    image: mongo
+    command: mongod --shardsvr --replSet nodo02-rs --port 27017 --dbpath /data/db
+    ports:
+      - 50005:27017
+    volumes:
+      - ./data/nodo-shard02-srv02:/data/db
+      - ./scripts:/scripts
+
+  nodo-shard02-srv3:
+    container_name: nodo-shard02-srv3
+    image: mongo
+    command: mongod --shardsvr --replSet nodo02-rs --port 27017 --dbpath /data/db
+    ports:
+      - 50006:27017
+    volumes:
+      - ./data/nodo-shard02-srv3:/data/db
+      - ./scripts:/scripts
+
