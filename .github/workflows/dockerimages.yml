@@ -18,7 +18,5 @@ jobs:
         run: docker-compose -f docker-config/docker-compose-config-server.yaml up -d
       - name: Check running containers
         run: docker ps -a
-      - name: Check logs
-        run: docker logs backend
       - name: Run test suite
         run: docker-compose exec config-srv01 sh -c "./scripts/testing.js"
