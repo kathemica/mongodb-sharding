@@ -18,7 +18,8 @@ services:
     image: mongo
     hostname: nodo-shard01-srv01
     container_name: nodo-shard01-srv01    
-    command: mongod --shardsvr --replSet nodo01-rs --port 27017 --dbpath /data/db
+    command: mongod --shardsvr --replSet nodo01-rs --port 27017 --bind_ip_all
+    restart: always
     ports:
       - 50001:27017  
     volumes:
@@ -29,7 +30,8 @@ services:
     image: mongo
     hostname: nodo-shard01-srv02
     container_name: nodo-shard01-srv02
-    command: mongod --shardsvr --replSet nodo01-rs --port 27017 --dbpath /data/db
+    command: mongod --shardsvr --replSet nodo01-rs --port 27017 --bind_ip_all
+    restart: always
     ports:
       - 50002:27017
     volumes:
@@ -40,7 +42,8 @@ services:
     image: mongo
     hostname: nodo-shard01-srv03
     container_name: nodo-shard01-srv03
-    command: mongod --shardsvr --replSet nodo01-rs --port 27017 --dbpath /data/db
+    command: mongod --shardsvr --replSet nodo01-rs --port 27017 --bind_ip_all
+    restart: always
     ports:
       - 50003:27017
     volumes:

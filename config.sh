@@ -11,20 +11,23 @@ printf "\n"
 # How to use this
 # source ./config.sh 
 
+cd docker-config
+
 #---------------------------------------------------------------
 #Config server
 #---------------------------------------------------------------
 printf '\e[1;32m%-6s\e[m' "Config server: creando contenedores en Docker"
 printf "\n"
 #Creamos los contenedores
-docker-compose -f docker-config/docker-compose-config-server.yaml up -d
+docker-compose -f docker-compose-config-server.yaml up -d
 
 sleep 5
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Config server: configurando el replicaset"
 printf "\n"
-docker exec config-srv01 sh -c "mongo < ./scripts/config-server.js"
+
+docker-compose exec config-srv01 sh -c "mongo < ./scripts/config-server.js"
 
 #---------------------------------------------------------------
 #Nodo 01
@@ -32,14 +35,14 @@ docker exec config-srv01 sh -c "mongo < ./scripts/config-server.js"
 printf '\e[1;32m%-6s\e[m' "Nodo 01: creando contenedores en Docker"
 printf "\n"
 #Creamos los contenedores
-docker-compose -f docker-config/docker-compose-nodo01.yaml up -d
+docker-compose -f docker-compose-nodo01.yaml up -d
 
 sleep 5
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Nodo 01: configurando el replicaset"
 printf "\n"
-docker exec nodo-shard01-srv01 sh -c "mongo < ./scripts/config-nodo01.js"
+docker-compose exec nodo-shard01-srv01 sh -c "mongo < ./scripts/config-nodo01.js"
 
 #---------------------------------------------------------------
 #Nodo 02
@@ -48,14 +51,14 @@ printf "\n"
 printf '\e[1;32m%-6s\e[m' "Nodo 02: creando contenedores en Docker"
 printf "\n"
 #Creamos los contenedores
-docker-compose -f docker-config/docker-compose-nodo02.yaml up -d
+docker-compose -f docker-compose-nodo02.yaml up -d
 
 sleep 5
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Nodo 02: configurando el replicaset"
 printf "\n"
-docker exec nodo-shard02-srv01 sh -c "mongo < ./scripts/config-nodo02.js"
+docker-compose exec nodo-shard02-srv01 sh -c "mongo < ./scripts/config-nodo02.js"
 
 #---------------------------------------------------------------
 #Mongos
@@ -64,19 +67,19 @@ printf "\n"
 printf '\e[1;32m%-6s\e[m' "Mongos: creando contenedores en Docker"
 printf "\n"
 #Creamos los contenedores
-docker-compose -f docker-config/docker-compose-mongos.yaml up -d
+docker-compose -f docker-compose-mongos.yaml up -d
 
 sleep 5
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Mongos: configurando mongos"
 printf "\n"
-docker exec mongos sh -c "mongo < ./scripts/config-mongos.js"
+docker-compose exec mongos sh -c "mongo < ./scripts/config-mongos.js"
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Mongos: configurando mongos - Añadiendo Nodo01 y Nodo02"
 printf "\n"
-docker exec mongos sh -c "mongo < ./scripts/config-mongos.js"
+docker-compose exec mongos sh -c "mongo < ./scripts/config-mongos.js"
 
 
 

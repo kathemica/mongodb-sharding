@@ -18,6 +18,7 @@ services:
     container_name: config-srv01
     image: mongo
     command: mongod --configsvr --replSet config-rs --port 27017 --dbpath /data/db
+    restart: always
     ports:
       - 40001:27017
     volumes:      
@@ -28,6 +29,7 @@ services:
     container_name: config-srv02
     image: mongo
     command: mongod --configsvr --replSet config-rs --port 27017 --dbpath /data/db
+    restart: always
     ports:
       - 40002:27017
     volumes:
@@ -38,6 +40,7 @@ services:
     container_name: config-srv03
     image: mongo
     command: mongod --configsvr --replSet config-rs --port 27017 --dbpath /data/db
+    restart: always
     ports:
       - 40003:27017
     volumes:
