@@ -19,4 +19,4 @@ jobs:
       - name: Check running containers
         run: docker ps -a
       - name: Run test suite
-        run: docker-compose exec config-srv01 sh -c "./scripts/config-server.js"
+        run: docker-compose exec config-srv01 sh -c "./scripts/testing.js"
