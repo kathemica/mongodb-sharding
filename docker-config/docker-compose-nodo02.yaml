@@ -21,8 +21,8 @@ services:
     ports:
       - 50004:27017
     volumes:
-      - ./data/nodo-shard02-srv01:/data/db
-      - ./scripts:/scripts
+      - ../data/nodo-shard02-srv01:/data/db
+      - ../scripts:/scripts
 
   nodo-shard02-srv02:
     container_name: nodo-shard02-srv02
@@ -31,8 +31,8 @@ services:
     ports:
       - 50005:27017
     volumes:
-      - ./data/nodo-shard02-srv02:/data/db
-      - ./scripts:/scripts
+      - ../data/nodo-shard02-srv02:/data/db
+      - ../scripts:/scripts
 
   nodo-shard02-srv3:
     container_name: nodo-shard02-srv3
@@ -41,6 +41,6 @@ services:
     ports:
       - 50006:27017
     volumes:
-      - ./data/nodo-shard02-srv3:/data/db
-      - ./scripts:/scripts
+      - ../data/nodo-shard02-srv3:/data/db
+      - ../scripts:/scripts
 

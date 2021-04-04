@@ -17,10 +17,10 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
       - name: Test
-        run: docker-compose -f docker-compose.yaml up -d
+        run: docker-compose -f docker-config/docker-compose-config-server.yaml up -d
       - name: Check running containers
         run: docker ps -a
       - name: Check logs
         run: docker logs backend
       - name: Run test suite
-        run: docker-compose exec nodo-shard01-srv1 sh -c "mongo < /scripts/testing.js"
+        run: docker-compose exec config-srv01 sh -c "./scripts/testing.js"

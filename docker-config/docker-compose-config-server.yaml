@@ -21,8 +21,8 @@ services:
     ports:
       - 40001:27017
     volumes:      
-      - ./scripts:/scripts
-      - ./data/nodo-config-srv01:/data/db
+      - ../scripts:/scripts
+      - ../data/nodo-config-srv01:/data/db
 
   config-srv02:
     container_name: config-srv02
@@ -31,8 +31,8 @@ services:
     ports:
       - 40002:27017
     volumes:
-      - ./scripts:/scripts
-      - ./data/nodo-config-srv02:/data/db
+      - ../scripts:/scripts
+      - ../data/nodo-config-srv02:/data/db
 
   config-srv03:
     container_name: config-srv03
@@ -41,7 +41,7 @@ services:
     ports:
       - 40003:27017
     volumes:
-      - ./scripts:/scripts
-      - ./data/nodo-config-srv03:/data/db
+      - ../scripts:/scripts
+      - ../data/nodo-config-srv03:/data/db
       
 

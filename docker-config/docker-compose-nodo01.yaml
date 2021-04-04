@@ -22,8 +22,8 @@ services:
     ports:
       - 50001:27017  
     volumes:
-      - ./scripts:/scripts
-      - ./data/nodo-shard01-srv01:/data/db
+      - ../scripts:/scripts
+      - ../data/nodo-shard01-srv01:/data/db
 
   nodo-shard01-srv02:
     image: mongo
@@ -33,8 +33,8 @@ services:
     ports:
       - 50002:27017
     volumes:
-      - ./data/nodo-shard01-srv02:/data/db
-      - ./scripts:/scripts
+      - ../data/nodo-shard01-srv02:/data/db
+      - ../scripts:/scripts
 
   nodo-shard01-srv3:
     image: mongo
@@ -44,5 +44,5 @@ services:
     ports:
       - 50003:27017
     volumes:
-      - ./data/nodo-shard01-srv3:/data/db
-      - ./scripts:/scripts
+      - ../data/nodo-shard01-srv3:/data/db
+      - ../scripts:/scripts
