@@ -35,12 +35,12 @@ services:
       - ../scripts:/scripts
 
   nodo-shard02-srv3:
-    container_name: nodo-shard02-srv3
+    container_name: nodo-shard02-srv03
     image: mongo
     command: mongod --shardsvr --replSet nodo02-rs --port 27017 --dbpath /data/db
     ports:
       - 50006:27017
     volumes:
-      - ../data/nodo-shard02-srv3:/data/db
+      - ../data/nodo-shard02-srv03:/data/db
       - ../scripts:/scripts
 
