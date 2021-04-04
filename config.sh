@@ -11,6 +11,17 @@ printf "\n"
 # How to use this
 # source ./config.sh 
 
+#Funcion que crea un contador de N a 0
+#Parámetro
+#Tiempo  -- $1
+timerFunction(){
+    for (( c=$1; c>0; c-- ))
+        do  
+            echo -ne "\r$c ";
+            sleep 1;
+    done
+}
+
 cd docker-config
 
 #---------------------------------------------------------------
@@ -21,7 +32,7 @@ printf "\n"
 #Creamos los contenedores
 docker-compose -f docker-compose-config-server.yaml up -d
 
-sleep 5
+timerFunction 5
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Config server: configurando el replicaset"
@@ -37,7 +48,7 @@ printf "\n"
 #Creamos los contenedores
 docker-compose -f docker-compose-nodo01.yaml up -d
 
-sleep 5
+timerFunction 5
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Nodo 01: configurando el replicaset"
@@ -53,7 +64,7 @@ printf "\n"
 #Creamos los contenedores
 docker-compose -f docker-compose-nodo02.yaml up -d
 
-sleep 5
+timerFunction 5
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Nodo 02: configurando el replicaset"
@@ -69,19 +80,17 @@ printf "\n"
 #Creamos los contenedores
 docker-compose -f docker-compose-mongos-service.yaml up -d
 
-sleep 5
-
-printf "\n"
-printf '\e[1;32m%-6s\e[m' "Mongos: configurando mongos"
-printf "\n"
-#docker-compose exec mongos sh -c "mongo < ./scripts/config-mongos.js"
+timerFunction 5
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Mongos: configurando mongos - Añadiendo Nodo01 y Nodo02"
 printf "\n"
-#docker-compose exec mongos sh -c "mongo < ./scripts/config-mongos.js"
+docker-compose exec mongos-service sh -c "mongo < ./scripts/config-mongos.js"
 
-
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "PAUSA: En espera que los nodos se balanceen."
+printf "\n"
+timerFunction 30
 
 printf "\n"
 printf '\e[1;31m%-6s\e[m' "Fin..."
