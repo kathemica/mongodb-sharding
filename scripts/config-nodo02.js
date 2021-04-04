@@ -1,5 +1,5 @@
 rs.initiate({
-    _id: "nodo01-rs",      
+    _id: "nodo02-rs",      
     members: [
       { _id : 0, host : "10.0.0.10:50004" },
       { _id : 1, host : "10.0.0.10:50005" },

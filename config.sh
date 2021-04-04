@@ -67,19 +67,19 @@ printf "\n"
 printf '\e[1;32m%-6s\e[m' "Mongos: creando contenedores en Docker"
 printf "\n"
 #Creamos los contenedores
-docker-compose -f docker-compose-mongos.yaml up -d
+docker-compose -f docker-compose-mongos-service.yaml up -d
 
 sleep 5
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Mongos: configurando mongos"
 printf "\n"
-docker-compose exec mongos sh -c "mongo < ./scripts/config-mongos.js"
+#docker-compose exec mongos sh -c "mongo < ./scripts/config-mongos.js"
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Mongos: configurando mongos - Añadiendo Nodo01 y Nodo02"
 printf "\n"
-docker-compose exec mongos sh -c "mongo < ./scripts/config-mongos.js"
+#docker-compose exec mongos sh -c "mongo < ./scripts/config-mongos.js"
 
 
 
