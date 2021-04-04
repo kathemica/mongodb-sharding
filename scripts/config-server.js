@@ -1,6 +1,6 @@
 rs.initiate(
     {
-      _id: "cfgrs",
+      _id: "config-rs",
       configsvr: true,
       members: [
         { _id : 0, host : "10.0.0.10:40001" },
