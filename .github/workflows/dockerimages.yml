@@ -14,7 +14,7 @@ jobs:
     steps:      
       - name: Checking out code
         uses: actions/checkout@main
-      - name: Build the stack
-        run: source ./config.sh
-      - name: Check running containers
+      - name: Build the stack        
+        run: docker-compose -f docker-config/docker-compose-config-server.yaml up -d
+      - name: Check running containers      
         run: docker ps -a      
