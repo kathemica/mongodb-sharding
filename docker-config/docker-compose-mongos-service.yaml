@@ -14,11 +14,11 @@ services:
 #------------------------------------------------------
 # Config Server
 #------------------------------------------------------
-  mongos:    
+  mongos-service:    
     hostname: mongos-service
     container_name: mongos-service 
     image: mongo
-    command: mongos --configdb config-rs/10.0.0.10:40001,10.0.0.10:40002,10.0.0.10:40003 --bind_ip 0.0.0.0 --port 27017
+    command: mongos --configdb config-rs/10.0.0.10:40001,10.0.0.10:40002,10.0.0.10:40003 --bind_ip_all --port 27017
     restart: always
     ports:
       - 60000:27017
