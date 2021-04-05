@@ -98,10 +98,9 @@ printf "\n"
 
 docker exec mongos-service sh -c "mongoimport --db iot --collection devices --file ./scripts/iot-devices-db.json --jsonArray"
 
-timerFunction 20
+timerFunction 5
 
-docker exec mongos-service sh -c "mongos sh.enableSharding(\"iot\")"
-docker exec mongos-service sh -c "mongos use iot; | db.devices.getShardDistribution();"
+docker exec mongos-service sh -c "mongo < ./scripts/mongos-several-commands.js"
 
 printf "\n"
 printf '\e[1;31m%-6s\e[m' "Fin..."
