@@ -1,5 +1,4 @@
 use iot;
-sh.shardCollection("iot.devices", {"deviceId" : 1,"telemetry.full" : 1});
-sh.enableSharding("iot");
+sh.ensureIndex( {"deviceId" : hashed});
+sh.shardCollection("iot.devices", {"deviceId" : hashed});
 db.devices.getShardDistribution();
-sh.status();
