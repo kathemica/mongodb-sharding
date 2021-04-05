@@ -75,7 +75,7 @@ docker-compose exec nodo-shard02-srv01 sh -c "mongo < ./scripts/config-nodo02.js
 #Mongos
 #---------------------------------------------------------------
 printf "\n"
-printf '\e[1;32m%-6s\e[m' "Mongos: creando contenedores en Docker"
+printf '\e[1;32m%-6s\e[m' "Mongos-service: creando contenedores en Docker"
 printf "\n"
 #Creamos los contenedores
 docker-compose -f docker-compose-mongos-service.yaml up -d
@@ -83,9 +83,9 @@ docker-compose -f docker-compose-mongos-service.yaml up -d
 timerFunction 5
 
 printf "\n"
-printf '\e[1;32m%-6s\e[m' "Mongos: configurando mongos - Añadiendo Nodo01 y Nodo02"
+printf '\e[1;32m%-6s\e[m' "Mongos-service: configurando mongos - Añadiendo Nodo01 y Nodo02"
 printf "\n"
-docker-compose exec mongos-service sh -c "mongo < ./scripts/config-mongos.js"
+docker exec mongos-service sh -c "mongo < ./scripts/config-mongos.js"
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "PAUSA: En espera que los nodos se balanceen."
@@ -93,5 +93,18 @@ printf "\n"
 timerFunction 30
 
 printf "\n"
+printf '\e[1;31m%-6s\e[m' "Cargando la base de datos iot con la coleccion devices: 1000 registros y 4 sets de datos cada uno..."
+printf "\n"
+
+docker exec mongos-service sh -c "mongoimport --db iot --collection devices --file ./scripts/iot-devices-db.json --jsonArray"
+
+timerFunction 20
+
+docker exec mongos-service sh -c "mongos sh.enableSharding(\"iot\")"
+docker exec mongos-service sh -c "mongos use iot; | db.devices.getShardDistribution();"
+
+printf "\n"
 printf '\e[1;31m%-6s\e[m' "Fin..."
 printf "\n"
+
+cd ..
