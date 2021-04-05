@@ -1,5 +1,6 @@
-use iot ;
-sh.enableSharding("iot") |
-db.devices.ensureIndex( {"deviceId" : "hashed"}) |
-sh.shardCollection("iot.devices", {"deviceId" : "hashed"});
+use finanzas ;
+sh.enableSharding("finanzas") |
+db.devices.ensureIndex( {"cliente" : "hashed"}) |
+sh.shardCollection("finanzas.finanzas", {"cliente" : "hashed"});
+sh.status();
 db.devices.getShardDistribution();

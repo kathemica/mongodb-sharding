@@ -93,14 +93,13 @@ printf "\n"
 timerFunction 30
 
 printf "\n"
-printf '\e[1;31m%-6s\e[m' "Cargando la base de datos iot con la coleccion devices: 1000 registros y 4 sets de datos cada uno..."
+printf '\e[1;31m%-6s\e[m' "Cargando la base de datos..."
 printf "\n"
 
-docker exec mongos-service sh -c "mongoimport --db iot --collection devices --file ./scripts/iot-devices-db.json --jsonArray"
+#docker exec mongos-service sh -c "mongoimport --db cuentas --collection facturas --file ./scripts/facts --jsonArray"
+docker exec mongos-service sh -c "mongo < ./scripts/load-database.js"
 
 docker exec mongos-service sh -c "mongo < ./scripts/mongos-several-commands.js"
-
-
 
 printf "\n"
 printf '\e[1;31m%-6s\e[m' "Fin..."
