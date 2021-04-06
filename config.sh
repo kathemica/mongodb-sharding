@@ -87,18 +87,71 @@ printf '\e[1;32m%-6s\e[m' "Mongos-service: configurando mongos - Añadiendo Nodo
 printf "\n"
 docker exec mongos-service sh -c "mongo < ./scripts/config-mongos.js"
 
-printf "\n"
-printf '\e[1;32m%-6s\e[m' "PAUSA: En espera que los nodos se balanceen."
-printf "\n"
-timerFunction 30
+timerFunction 5
 
 printf "\n"
-printf '\e[1;31m%-6s\e[m' "Cargando la base de datos..."
+printf '\e[1;31m%-6s\e[m' "Mongos-service: Habilitando sharding para la base de datos..."
 printf "\n"
 
 docker exec mongos-service sh -c "mongo < ./scripts/mongos-several-commands.js"
 
+printf "\n"
+printf '\e[1;31m%-6s\e[m' "Mongos-service: Cargando la base de datos... se paciente por favor."
+printf "\n"
 docker exec mongos-service sh -c "mongo < ./scripts/load-database.js"
+
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "Mongos-service: Agregando dos (2) nuevo shards al cluster."
+printf "\n"
+
+#---------------------------------------------------------------
+#Nodo 03
+#---------------------------------------------------------------
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "Nodo 03: creando contenedores en Docker"
+printf "\n"
+#Creamos los contenedores
+docker-compose -f docker-compose-nodo03.yaml up -d
+
+timerFunction 5
+
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "Nodo 03: configurando el replicaset"
+printf "\n"
+docker-compose exec nodo-shard03-srv01 sh -c "mongo < ./scripts/config-nodo03.js"
+
+#---------------------------------------------------------------
+#Nodo 04
+#---------------------------------------------------------------
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "Nodo 04: creando contenedores en Docker"
+printf "\n"
+#Creamos los contenedores
+docker-compose -f docker-compose-nodo04.yaml up -d
+
+timerFunction 5
+
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "Nodo 04: configurando el replicaset"
+printf "\n"
+docker-compose exec nodo-shard04-srv01 sh -c "mongo < ./scripts/config-nodo04.js"
+
+timerFunction 5
+
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "Mongos-service: configurando mongos - Añadiendo Nodo03 y Nodo04"
+printf "\n"
+docker exec mongos-service sh -c "mongo < ./scripts/config-mongos-update.js"
+
+printf "\n"
+printf '\e[1;31m%-6s\e[m' "Mongos-service: Cargando la base de datos con nuevos registros... se paciente por favor."
+printf "\n"
+docker exec mongos-service sh -c "mongo < ./scripts/load-database.js"
+
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "PAUSA: En espera que los nodos se balanceen."
+printf "\n"
+timerFunction 300
 
 printf "\n"
 printf '\e[1;31m%-6s\e[m' "Fin..."

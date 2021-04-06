@@ -1,0 +1,49 @@
+############################################################################### 
+# Authors:  Kathrine Aguirre
+# Date:     Abril 2021
+# Licence:  Apache v02
+# Project:  Mongo Sharding
+# Brief:    Docker compose file to configure whole application
+#
+# How to use the containers
+#   - docker-compose -f docker-compose.yaml up -d
+#
+###############################################################################
+version: '3'
+services:
+#------------------------------------------------------
+# NODO 03
+#------------------------------------------------------
+  nodo-shard03-srv01:
+    container_name: nodo-shard03-srv01
+    image: mongo
+    command: mongod --shardsvr --replSet nodo03-rs --port 27017 --dbpath /data/db
+    restart: always
+    ports:
+      - 50007:27017
+    volumes:
+      - ../data/nodo-shard03-srv01:/data/db
+      - ../scripts:/scripts
+
+  nodo-shard03-srv02:
+    container_name: nodo-shard03-srv02
+    image: mongo
+    command: mongod --shardsvr --replSet nodo03-rs --port 27017 --dbpath /data/db
+    restart: always
+    ports:
+      - 50008:27017
+    volumes:
+      - ../data/nodo-shard03-srv02:/data/db
+      - ../scripts:/scripts
+
+  nodo-shard03-srv3:
+    container_name: nodo-shard03-srv03
+    image: mongo
+    command: mongod --shardsvr --replSet nodo03-rs --port 27017 --dbpath /data/db
+    restart: always
+    ports:
+      - 50009:27017
+    volumes:
+      - ../data/nodo-shard03-srv03:/data/db
+      - ../scripts:/scripts
+
