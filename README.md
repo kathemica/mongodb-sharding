@@ -18,4 +18,61 @@
 ---
 # FIUBA - MongoDB sharding 
 
-Ejercicio práctico de implementación de Sharding
+Ejercicio práctico de implementación de Sharding.
+
+Se hacen las siguientes presunciones:
+
+* <i class="fab fa-docker" style="color:blue"></i> El cliente donde se va a configurar el *shard* ya posee instalado y configurado *Docker* como contenedor de imágenes y *Docker compose*.
+* <i class="far fa-hand-paper" style="color:red"></i> SE UTILIZA **docker-compose** EN ESTE PROYECTO.
+* Se ejecuta en Linux.
+
+---
+
+Este ejercicio ejecuta un script para la implementación inicial de un shard con 4 nodos, donde contendrá la siguien te estructura:
+* mongos-service: router (01 nodo - 01 servidor)
+  * mongos-service
+* config-rs: Replicaset de configuracion (01 nodo - 03 servidores)
+  * config-srv01
+  * config-srv02
+  * config-srv03
+  
+* nodo01-rs: Replicaset de almacentamiento (01 nodo - 03 servidores)
+  * nodo-shard01-srv01
+  * nodo-shard01-srv02
+  * nodo-shard01-srv03
+
+* nodo02-rs: Replicaset de almacentamiento (01 nodo - 03 servidores)
+  * nodo-shard02-srv01
+  * nodo-shard02-srv02
+  * nodo-shard02-srv03
+
+Luego de la carga de datos y configuración del shard se añadirán dos nodos más:
+* nodo03-rs: Replicaset de almacentamiento (01 nodo - 03 servidores)
+  * nodo-shard03-srv01
+  * nodo-shard03-srv02
+  * nodo-shard03-srv03
+
+* nodo04-rs: Replicaset de almacentamiento (01 nodo - 03 servidores)
+  * nodo-shard04-srv01
+  * nodo-shard04-srv02
+  * nodo-shard04-srv03
+
+
+Finalmente se ejecutarán dos consultas:
+* Una que debería consultar un solo nodo
+* Otra que debería consultar todos los nodos
+
+Para la ejecución de este proyecto se debe:
+
+1. Clonar este repositorio:
+```
+git clone https://github.com/kathemica/mongodb-sharding.git
+```
+
+2. Ejecutar el script de configuración:
+```
+source ./config.sh
+```
+**NOTA: Durante la ejecución del script deberías ver por consola todos los logs generados por los comandos del script.**
+
+
