@@ -75,4 +75,22 @@ source ./config.sh
 ```
 **NOTA: Durante la ejecución del script deberías ver por consola todos los logs generados por los comandos del script.**
 
+---
+Para acceder a la configuracón y datos del proyecto ejecutar:
+
+```
+docker exec -it mongos-service /bin/bash
+```
+
+Luego:
+```
+mongo
+```
+
+Al hacer esto debería estar en la consola de mongos
+
+Comandos útiles:
+* **sh.status()**: Consulta el estado del shard.
+* **db.facturas.getShardDistribution()**: Consulta cómo está distribuida la base de datos, previamente se debe seleccionar con **db *nombreDeLaBaseDeDatos***.
+* **db.*nombreDeLaColección*.getIndexes()**: permite conocer los indices que estan en la coleccón de la base de datos a consultar, previamente seleccionar la base de datos.
 
