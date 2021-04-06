@@ -118,7 +118,7 @@ timerFunction 5
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Nodo 03: configurando el replicaset"
 printf "\n"
-docker-compose exec nodo-shard03-srv01 sh -c "mongo < ./scripts/config-nodo03.js"
+docker exec nodo-shard03-srv01 sh -c "mongo < ./scripts/config-nodo03.js"
 
 #---------------------------------------------------------------
 #Nodo 04
@@ -134,10 +134,13 @@ timerFunction 5
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Nodo 04: configurando el replicaset"
 printf "\n"
-docker-compose exec nodo-shard04-srv01 sh -c "mongo < ./scripts/config-nodo04.js"
+docker exec nodo-shard04-srv01 sh -c "mongo < ./scripts/config-nodo04.js"
 
 timerFunction 5
 
+#---------------------------------------------------------------
+#Mongos
+#---------------------------------------------------------------
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Mongos-service: configurando mongos - Añadiendo Nodo03 y Nodo04"
 printf "\n"
@@ -152,6 +155,23 @@ printf "\n"
 printf '\e[1;32m%-6s\e[m' "PAUSA: En espera que los nodos se balanceen."
 printf "\n"
 timerFunction 300
+
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "Mongos-service: Consultando la nueva metadata"
+printf "\n"
+docker exec mongos-service sh -c "mongo < ./scripts/query-metadata.js"
+
+timerFunction 5
+
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "Mongos-service: Query con un sólo shard"
+printf "\n"
+docker exec mongos-service sh -c "mongo < ./scripts/query-shard-solo.js"
+
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "Mongos-service: Query con todos los shards"
+printf "\n"
+docker exec mongos-service sh -c "mongo < ./scripts/query-shard-all.js"
 
 printf "\n"
 printf '\e[1;31m%-6s\e[m' "Fin..."

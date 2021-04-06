@@ -1,3 +1,3 @@
-sh.addShard("beta/beta01,beta02,beta03")
-sh.addShard("charlie/charlie01,charlie02,charlie03")
-sh.status()
+sh.addShard("nodo03-rs/10.0.0.10:50007,10.0.0.10:50008,10.0.0.10:50009");
+sh.addShard("nodo04-rs/10.0.0.10:50010,10.0.0.10:50011,10.0.0.10:50012");
+sh.status();
