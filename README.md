@@ -69,7 +69,7 @@ Para la ejecución de este proyecto se debe:
 git clone https://github.com/kathemica/mongodb-sharding.git
 ```
 
-2. Ejecutar el script de configuración:
+2. Ejecutar el script de configuración **luego de acceder a la carpeta del proyecto**:
 ```
 source ./config.sh
 ```
@@ -90,6 +90,9 @@ mongo
 Al hacer esto debería estar en la consola de mongos
 
 Comandos útiles:
+* **show dbs**: Muestra las bases de datos en el servidor.
+* **use *nombreDeLaBaseDeDatos***: Selecciona una base datos si existe sino la va a crear.
+* **show collections**: Muestra las colecciones existentes en una base de datos.
 * **sh.status()**: Consulta el estado del shard.
 * **db.facturas.getShardDistribution()**: Consulta cómo está distribuida la base de datos, previamente se debe seleccionar con **db *nombreDeLaBaseDeDatos***.
 * **db.*nombreDeLaColección*.getIndexes()**: permite conocer los indices que estan en la coleccón de la base de datos a consultar, previamente seleccionar la base de datos.

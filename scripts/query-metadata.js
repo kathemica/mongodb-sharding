@@ -1,3 +1,4 @@
+use finanzas
 sh.status()
 db.facturas.getShardDistribution()
 use config
