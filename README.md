@@ -26,9 +26,17 @@ Se hacen las siguientes presunciones:
 * <i class="far fa-hand-paper" style="color:red"></i> SE UTILIZA **docker-compose** EN ESTE PROYECTO.
 * Se ejecuta en Linux.
 
+
+<a href="https://youtu.be/ONQ6U0OQKcw " target="_blank">
+  <img 
+   src="https://i9.ytimg.com/vi/ONQ6U0OQKcw/mq2.jpg?sqp=COCzs4MG&rs=AOn4CLDvsgbdKLjjI8-Zi5vcpHC2BdsuOQ" 
+alt="Video tutorial" width="320" border="10" />Click acá para ver el video</a>
+
+
+
 ---
 
-Este ejercicio ejecuta un script para la implementación inicial de un shard con 4 nodos, donde contendrá la siguien te estructura:
+Este ejercicio ejecuta un script para la implementación inicial de un shard con 4 nodos, donde contendrá la siguiente estructura:
 * mongos-service: router (01 nodo - 01 servidor)
   * mongos-service
 * config-rs: Replicaset de configuracion (01 nodo - 03 servidores)
