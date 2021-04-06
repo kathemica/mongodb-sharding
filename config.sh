@@ -96,7 +96,6 @@ printf "\n"
 printf '\e[1;31m%-6s\e[m' "Cargando la base de datos..."
 printf "\n"
 
-#docker exec mongos-service sh -c "mongoimport --db cuentas --collection facturas --file ./scripts/facts --jsonArray"
 docker exec mongos-service sh -c "mongo < ./scripts/load-database.js"
 
 docker exec mongos-service sh -c "mongo < ./scripts/mongos-several-commands.js"

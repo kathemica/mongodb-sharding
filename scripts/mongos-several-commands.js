@@ -1,6 +1,5 @@
-use finanzas 
-db.facturas.createIndex({"cliente.region": 1, "cliente.nombre": 1})
-sh.enableSharding("finanzas")
-sh.shardCollection("finanzas.facturas", {"cliente" : "hashed"})
+use finanzas
+db.facturas.createIndex({"cliente.cuit" : "hashed"})
+sh.shardCollection("finanzas.facturas", {"cliente.cuit" : "hashed"})
 sh.status()
-db.devices.getShardDistribution()
+db.facturas.getShardDistribution()
