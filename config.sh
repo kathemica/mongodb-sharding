@@ -96,9 +96,9 @@ printf "\n"
 printf '\e[1;31m%-6s\e[m' "Cargando la base de datos..."
 printf "\n"
 
-docker exec mongos-service sh -c "mongo < ./scripts/load-database.js"
-
 docker exec mongos-service sh -c "mongo < ./scripts/mongos-several-commands.js"
+
+docker exec mongos-service sh -c "mongo < ./scripts/load-database.js"
 
 printf "\n"
 printf '\e[1;31m%-6s\e[m' "Fin..."
