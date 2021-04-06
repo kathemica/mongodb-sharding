@@ -30,7 +30,7 @@ Se hacen las siguientes presunciones:
 <a href="https://youtu.be/ONQ6U0OQKcw " target="_blank">
   <img 
    src="https://i9.ytimg.com/vi/ONQ6U0OQKcw/mq2.jpg?sqp=COCzs4MG&rs=AOn4CLDvsgbdKLjjI8-Zi5vcpHC2BdsuOQ" 
-alt="Video tutorial" width="320" border="10" />Click acá para ver el video</a>
+alt="Video tutorial" width="320" border="10" /><br>Click acá para ver el video</a>
 
 
 
